@@ -42,11 +42,8 @@ let term = $(function() {
             this.echo('[[b;yellow;] This requires prior registation and approval to use the aka platform.]\n' +
                 'If unregistered, register [[!;;;;https://infotoast.org/aka/register.php]here]\n' +
                 'The GUI version of this can be accessed at: [[!;;;;https://infotoast.org/aka/]Info Toast AKA]');
+            var out = "";
             this.set_mask("*").read('Password: ', passwd => {
-                if (username === "" || passwd === "") {
-                    this.echo('[[;red;]Both boxes must be filled!]');
-                    return;
-                }
                 $.post("https://infotoast.org/aka/php/action_login.php", {
                     un: username,
                     pw: passwd
@@ -58,18 +55,19 @@ let term = $(function() {
                         }
                         $.post("https://infotoast.org/aka/php/action_mklink.php", data, function(data, status) {
                             if (data.endsWith("success")) {
-                                term.echo("[[;green;]Link created successfully and available at] [[!;;;;https://infotoast.org/aka/" + url + "]https://infotoast.org/aka/" + url + "]");
+                                out += "[[;green;]Link created successfully and available at] [[!;;;;https://infotoast.org/aka/" + url + "]https://infotoast.org/aka/" + url + "]";
                             } else {
-                                term.echo("[[;red;]Did not work!]");
-                                term.echo(data);
+                                out += "[[;red;]Did not work!]\n";
+                                out += data;
                             }
                         });
                     } else {
-                        term.echo("[[;red;]Username or password invalid!]");
-                        term.echo(data);
+                        out += "[[;red;]Username or password invalid!]\n";
+                        out += data;
                     }
                 });
             });
+            this.echo(out);
         },
         discord: function() {
             window.location.replace("https://discord.gg/infotoast");
