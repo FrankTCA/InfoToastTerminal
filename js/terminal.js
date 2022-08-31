@@ -18,7 +18,7 @@ let fullText = fullAscii + "\n[[;yellow;]Welcome to the Info Toast Terminal!]\n"
     "[[;bold;]* [[;yellow;]Type] [[;white;][[;bold;]help]][[;yellow;] for a list of available commands.]\n" +
     "[[;bold;]*] [[;yellow;]Type] [[;white;][[;bold;]home]][[;yellow;] to return to the info toast homepage.\n"
 
-$(function() {
+let term = $(function() {
     $('body').terminal({
         home: function() {
             window.location.replace("https://infotoast.org/site/");
@@ -28,7 +28,7 @@ $(function() {
                 '[[b;white;]* home]: Go to info toast homepage.\n' +
                 '[[b;white;]* help]: Shows this menu.\n' +
                 '[[b;white;]* close]: Closes this tab.\n' +
-                '[[b;white;]* aka (name)]: Creates shortened links using Info Toast AKA\n' +
+                '[[b;white;]* aka (username) (link name) (url)]: Creates shortened links using Info Toast AKA\n' +
                 '[[b;white;]* discord]: Go to info toast discord.\n' +
                 '[[b;white;]* matrix]: Register with info toast Matrix [[i;yellow;]recommended over discord]\n' +
                 '[[b;white;]* cat]: Try it and see';
@@ -58,15 +58,15 @@ $(function() {
                         }
                         $.post("https://infotoast.org/aka/php/action_mklink.php", data, function(data, status) {
                             if (data.endsWith("success")) {
-                                this.echo("[[;green;]Link created successfully and available at] [[!;;;;https://infotoast.org/aka/" + url + "]https://infotoast.org/aka/" + url + "]");
+                                term.echo("[[;green;]Link created successfully and available at] [[!;;;;https://infotoast.org/aka/" + url + "]https://infotoast.org/aka/" + url + "]");
                             } else {
-                                this.echo("[[;red;]Did not work!]");
-                                this.echo(data);
+                                term.echo("[[;red;]Did not work!]");
+                                term.echo(data);
                             }
                         });
                     } else {
-                        this.echo("[[;red;]Username or password invalid!]");
-                        this.echo(data);
+                        term.echo("[[;red;]Username or password invalid!]");
+                        term.echo(data);
                     }
                 });
             });
