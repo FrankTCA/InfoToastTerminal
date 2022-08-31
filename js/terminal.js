@@ -50,8 +50,8 @@ let term = $(function() {
                 console.log(data);
                 if (data.endsWith("success")) {
                     data = {
-                        lname,
-                        url
+                        name: lname,
+                        url: url
                     }
                     $.post("https://infotoast.org/aka/php/action_mklink.php", data, function(data, status) {
                         console.log(data);
