@@ -43,6 +43,7 @@ let term = $(function() {
             this.echo('[[b;yellow;] This requires prior registation and approval to use the aka platform.]\n' +
                 'If unregistered, register [[!;;;;https://infotoast.org/aka/register.php]here]\n' +
                 'The GUI version of this can be accessed at: [[!;;;;https://infotoast.org/aka/]Info Toast AKA]');
+            out = "";
             $.post("https://infotoast.org/aka/php/action_login.php", {
                 un: username,
                 pw: passwd
@@ -56,7 +57,7 @@ let term = $(function() {
                     $.post("https://infotoast.org/aka/php/action_mklink.php", data, function(data, status) {
                         console.log(data);
                         if (data.endsWith("success")) {
-                            out += "[[;green;]Link created successfully and available at] [[!;;;;https://infotoast.org/aka/" + url + "]https://infotoast.org/aka/" + url + "]";
+                            out += "[[;green;]Link created successfully and available at] [[!;;;;https://infotoast.org/aka/" + lname + "]https://infotoast.org/aka/" + lname + "]";
                         } else {
                             out += "[[;red;]Did not work!]\n";
                             out += data;
