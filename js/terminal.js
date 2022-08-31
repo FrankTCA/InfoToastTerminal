@@ -17,7 +17,7 @@ let fullAscii = "[[;cyan;]" + ascii + "]";
 let fullText = fullAscii + "\n[[;yellow;]Welcome to the Info Toast Terminal!]\n" +
     "[[;bold;]* [[;yellow;]Type] [[;white;][[;bold;]help]][[;yellow;] for a list of available commands.]\n" +
     "[[;bold;]*] [[;yellow;]Type] [[;white;][[;bold;]home]][[;yellow;] to return to the info toast homepage.\n"
-let out = "";
+var out = "";
 
 let term = $(function() {
     $('body').terminal({
