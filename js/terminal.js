@@ -43,6 +43,7 @@ let term = $(function() {
             this.echo('[[b;yellow;] This requires prior registation and approval to use the aka platform.]\n' +
                 'If unregistered, register [[!;;;;https://infotoast.org/aka/register.php]here]\n' +
                 'The GUI version of this can be accessed at: [[!;;;;https://infotoast.org/aka/]Info Toast AKA]');
+            $.ajaxSetup({async: false});
             $.post("https://infotoast.org/aka/php/action_login.php", {
                 un: username,
                 pw: passwd
