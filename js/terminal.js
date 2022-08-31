@@ -47,12 +47,14 @@ let term = $(function() {
                 un: username,
                 pw: passwd
             }, function(data, status) {
+                console.log(data);
                 if (data.endsWith("success")) {
                     data = {
                         lname,
                         url
                     }
                     $.post("https://infotoast.org/aka/php/action_mklink.php", data, function(data, status) {
+                        console.log(data);
                         if (data.endsWith("success")) {
                             out += "[[;green;]Link created successfully and available at] [[!;;;;https://infotoast.org/aka/" + url + "]https://infotoast.org/aka/" + url + "]";
                         } else {
