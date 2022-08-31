@@ -17,6 +17,7 @@ let fullAscii = "[[;cyan;]" + ascii + "]";
 let fullText = fullAscii + "\n[[;yellow;]Welcome to the Info Toast Terminal!]\n" +
     "[[;bold;]* [[;yellow;]Type] [[;white;][[;bold;]help]][[;yellow;] for a list of available commands.]\n" +
     "[[;bold;]*] [[;yellow;]Type] [[;white;][[;bold;]home]][[;yellow;] to return to the info toast homepage.\n"
+var out = "";
 
 let term = $(function() {
     $('body').terminal({
@@ -42,7 +43,6 @@ let term = $(function() {
             this.echo('[[b;yellow;] This requires prior registation and approval to use the aka platform.]\n' +
                 'If unregistered, register [[!;;;;https://infotoast.org/aka/register.php]here]\n' +
                 'The GUI version of this can be accessed at: [[!;;;;https://infotoast.org/aka/]Info Toast AKA]');
-            var out = "";
             this.set_mask("*").read('Password: ', passwd => {
                 $.post("https://infotoast.org/aka/php/action_login.php", {
                     un: username,
@@ -68,6 +68,7 @@ let term = $(function() {
                 });
             });
             this.echo(out);
+            out = "";
         },
         discord: function() {
             window.location.replace("https://discord.gg/infotoast");
