@@ -32,7 +32,8 @@ let term = $(function() {
                 '[[b;white;]* aka (username) (link name) (url) (password)]: Creates shortened links using Info Toast AKA\n' +
                 '[[b;white;]* discord]: Go to info toast discord.\n' +
                 '[[b;white;]* matrix]: Register with info toast Matrix [[i;yellow;]recommended over discord]\n' +
-                '[[b;white;]* cat]: Try it and see';
+                '[[b;white;]* cat]: Try it and see\n' +
+                '[[b;white;]* source]: See source code on github [[i;yellow;]feel free to contribute and make this more cool!]';
             this.echo(helptxt);
         },
         close: function() {
@@ -101,6 +102,9 @@ let term = $(function() {
                 "\n" +
                 "**********************************************************";
             this.echo(cat);
+        },
+        source: function() {
+            window.location.replace("https://github.com/FrankTCA/InfoToastTerminal");
         }
     }, {
         greetings: fullText,
