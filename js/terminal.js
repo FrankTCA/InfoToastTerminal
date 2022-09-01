@@ -159,6 +159,9 @@ let term = $(function() {
             } else {
                 this.echo("[[;red;]Version either too old or too new.] [[i;yellow;]Are you typing version for example] [[b;white;]'1.19.2'][[i;yellow;]?]");
             }
+        },
+        gehenna: function() {
+            window.open("https://www.curseforge.com/minecraft/mc-mods/gehenna-super-spooky-nether-overhaul-for-forge", "_blank");
         }
     }, {
         greetings: fullText,
