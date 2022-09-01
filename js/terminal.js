@@ -19,6 +19,22 @@ let fullText = fullAscii + "\n[[;yellow;]Welcome to the Info Toast Terminal!]\n"
     "[[;bold;]*] [[;yellow;]Type] [[;white;][[;bold;]home]][[;yellow;] to return to the info toast homepage.\n"
 var out = "";
 
+const download = (path, filename) => {
+    // Create a new link
+    const anchor = document.createElement('a');
+    anchor.href = path;
+    anchor.download = filename;
+
+    // Append to the DOM
+    document.body.appendChild(anchor);
+
+    // Trigger `click` event
+    anchor.click();
+
+    // Remove element from DOM
+    document.body.removeChild(anchor);
+};
+
 let term = $(function() {
     $('body').terminal({
         home: function() {
@@ -33,7 +49,10 @@ let term = $(function() {
                 '[[b;white;]* discord]: Go to info toast discord.\n' +
                 '[[b;white;]* matrix]: Register with info toast Matrix [[i;yellow;]recommended over discord]\n' +
                 '[[b;white;]* cat]: Try it and see\n' +
-                '[[b;white;]* source]: See source code on github [[i;yellow;]feel free to contribute and make this more cool!]';
+                '[[b;white;]* source]: See source code on github [[i;yellow;]feel free to contribute and make this more cool!]\n' +
+                '[[b;white;]* otg (mc version)]: Download our OpenTerrainGenerator fork for the latest MC versions\n' +
+                '[[b;white;]* baritone (mc version)]: Download our Baritone fork for the latest MC versions.\n' +
+                '[[b;white;]* gehenna]: Check out Frank\'s sideproject, Gehenna';
             this.echo(helptxt);
         },
         close: function() {
@@ -76,7 +95,7 @@ let term = $(function() {
             window.location.replace("https://discord.gg/infotoast");
         },
         matrix: function() {
-            window.location.replace("https://infotoast.element.io");
+            window.open("https://matrix.to/#/#info-toast:infotoast.ems.host", "_blank");
         },
         cat: function() {
             let cat = "**********************************************************\n" +
@@ -105,6 +124,41 @@ let term = $(function() {
         },
         source: function() {
             window.location.replace("https://github.com/FrankTCA/InfoToastTerminal");
+        },
+        otg: function(version) {
+            if (version.toString().startsWith("1.19")) {
+                const anchor = document.createElement('a');
+                anchor.href = "https://infotoast.org/aka/otg19";
+                anchor.download = "OpenTerrainGenerator-Paper-1.19.jar";
+
+                document.body.appendChild(anchor);
+                anchor.click();
+                this.echo("[[;green;]Downloaded!]");
+
+                document.body.removeChild(anchor);
+            } else {
+                this.echo("[[;red;]Version either too old or too new.] [[i;yellow;]Are you typing version for example] [[b;white;]'1.19.2'][[i;yellow;]?]");
+            }
+        },
+        baritone: function(version) {
+            if (version.toString() === "1.18.2") {
+                download("https://infotoast.org/Downloads/baritone-fabric-1.18.2.jar", "baritone-fabric-1.18.2.jar");
+                this.echo("[[;green;]Downloaded!]");
+            } else if (version.toString().startsWith("1.18")) {
+                download("https://infotoast.org/Downloads/baritone-fabric-1.18.jar", "baritone-fabric-1.18.jar");
+                this.echo("[[;green;]Downloaded!]");
+            } else if (version.toString() === "1.19") {
+                download("https://infotoast.org/Downloads/baritone-fabric-1.19.jar", "baritone-fabric-1.19.jar");
+                this.echo("[[;green;]Downloaded!]");
+            } else if (version.toString() === "1.19.1") {
+                download("https://infotoast.org/Downloads/baritone-fabric-1.19.1.jar", "baritone-fabric-1.19.1.jar");
+                this.echo("[[;green;]Downloaded!]");
+            } else if (version.toString() === "1.19.2") {
+                download("https://infotoast.org/Downloads/baritone-fabric-1.19.2.jar", "baritone-fabric-1.19.2.jar");
+                this.echo("[[;green;]Downloaded!]");
+            } else {
+                this.echo("[[;red;]Version either too old or too new.] [[i;yellow;]Are you typing version for example] [[b;white;]'1.19.2'][[i;yellow;]?]");
+            }
         }
     }, {
         greetings: fullText,
