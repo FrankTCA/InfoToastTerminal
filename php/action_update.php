@@ -17,9 +17,11 @@ $date = date("y-m-d.H:i");
 $backupfile = "../../term-backup/$date/";
 $from = "../../terminal/";
 
-function copyfolder ($from, $to, $ext="*") {
+function copyfolder ($from, $to, $ext="{.}*") {
     // (A1) SOURCE FOLDER CHECK
     if (!is_dir($from)) { exit("$from does not exist"); }
+
+    if (str_ends_with($from, ".")) { return; }
 
     // (A2) CREATE DESTINATION FOLDER
     if (!is_dir($to)) {
@@ -39,6 +41,8 @@ function copyfolder ($from, $to, $ext="*") {
         } else {
             if (!copy($a, "$to$ff")) { exit("Error copying $a to $to$ff"); }
             echo "$a copied to $to$ff\n";
+            echo "Deleting $a.";
+            unlink($a);
         }
     }}
 }
@@ -80,13 +84,10 @@ function deleteAll($str)
     }
 }
 
-deleteAll($from);
-
 echo "Files deleted. Now moving on to git clone.\n";
 
 exec("git clone --recursive https://github.com/FrankTCA/InfoToastTerminal /datastore/html/terminal");
 
-deleteAll("$from" . ".git");
 
 echo "Git command ran. Now restoring credentials file.\n";
 
