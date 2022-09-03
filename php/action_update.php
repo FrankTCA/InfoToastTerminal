@@ -28,7 +28,7 @@ function copyfolder ($from, $to, $ext="{.}*") {
     }
 
     // (A3) GET ALL FILES + FOLDERS IN SOURCE
-    $all = glob("$from$ext", GLOB_MARK | GLOB_BRACE);
+    $all = glob("$from$ext", GLOB_BRACE);
     print_r($all);
 
     // (A4) COPY FILES + RECURSIVE INTERNAL FOLDERS
