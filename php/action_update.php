@@ -37,10 +37,11 @@ function copyfolder ($from, $to, $ext="{,.}*") {
         $ff = basename($a); // CURRENT FILE/FOLDER
         if (is_dir($a)) {
             copyfolder("$from$ff/", "$to$ff/");
+            unlink($a);
         } else {
             if (!copy($a, "$to$ff")) { exit("Error copying $a to $to$ff"); }
             echo "$a copied to $to$ff\n";
-            echo "Deleting $a.";
+            echo "Deleting $a.\n";
             unlink($a);
         }
     }}
