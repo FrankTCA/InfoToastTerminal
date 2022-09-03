@@ -17,7 +17,7 @@ $date = date("y-m-d.H:i");
 $backupfile = "../../term-backup/$date/";
 $from = "../../terminal/";
 
-function copyfolder ($from, $to, $ext="{.}*") {
+function copyfolder ($from, $to, $ext="*") {
     // (A1) SOURCE FOLDER CHECK
     if (!is_dir($from)) { exit("$from does not exist"); }
 
@@ -28,7 +28,7 @@ function copyfolder ($from, $to, $ext="{.}*") {
     }
 
     // (A3) GET ALL FILES + FOLDERS IN SOURCE
-    $all = glob("$from$ext", GLOB_MARK | GLOB_BRACE);
+    $all = glob("$from$ext", GLOB_MARK);
     print_r($all);
 
     // (A4) COPY FILES + RECURSIVE INTERNAL FOLDERS
