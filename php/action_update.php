@@ -51,7 +51,7 @@ echo "Copy finished. Now deleting files.\n";
 // and directories
 function deleteAll($str)
 {
-
+    echo "> Deleting $str";
     // Check for files
     if (is_file($str)) {
 
