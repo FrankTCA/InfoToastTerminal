@@ -1,6 +1,6 @@
 <?php
 include("creds.php");
-require_once __DIR__ . "/vendor/autoload.php";
+require __DIR__ . "/vendor/autoload.php";
 
 if (!isset($_POST['admpass'])) {
     http_response_code(401);
@@ -87,6 +87,8 @@ function deleteAll($str)
 }
 
 echo "Files deleted. Now moving on to git clone.\n";
+
+require_once __DIR__ . "/vendor/wbadrh/git-dl/GitDownload.php";
 
 $git = new GitDownload("/datastore/html/terminal");
 
