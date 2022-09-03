@@ -50,9 +50,11 @@ let term = $(function() {
                 '[[b;white;]* matrix]: Register with info toast Matrix [[i;yellow;]recommended over discord]\n' +
                 '[[b;white;]* cat]: Try it and see\n' +
                 '[[b;white;]* source]: See source code on github [[i;yellow;]feel free to contribute and make this more cool!]\n' +
-                '[[b;white;]* otg (mc version)]: Download our OpenTerrainGenerator fork for the latest MC versions\n' +
+                '[[b;white;]* otg (mc version|website)]: Download our OpenTerrainGenerator fork for the latest MC versions, type [[b;white;]website] to visit their website.\n' +
                 '[[b;white;]* baritone (mc version)]: Download our Baritone fork for the latest MC versions.\n' +
-                '[[b;white;]* gehenna]: Check out Frank\'s sideproject, Gehenna';
+                '[[b;white;]* gehenna]: Check out Frank\'s sideproject, Gehenna\n' +
+                '[[b;white;]* memes (conversation|weird)]: Visit our meme repository, conversation memes are useful for winning internet arguments, surreal memes are just weird and funny\n' +
+                '[[b;white;]* thirtydollar]: Try it and see.';
             this.echo(helptxt);
         },
         close: function() {
@@ -136,6 +138,16 @@ let term = $(function() {
                 this.echo("[[;green;]Downloaded!]");
 
                 document.body.removeChild(anchor);
+            } else if (version.toString() === "1.18.2") {
+                download("https://infotoast.org/aka/otg18", "OpenTerrainGenerator-Paper-1.18.2-0.0.27.jar");
+                this.echo("[[;green;]Downloaded!]");
+            } else if (version.toString() === "1.16.5") {
+                download("https://infotoast.org/aka/otg16", "OpenTerrainGenerator-1.16.5-0.1.10.jar");
+                this.echo("[[;green;]Downloaded!]");
+            } else if (version.toString() === "1.12.2") {
+                download("https://infotoast.org/aka/otg12", "OpenTerrainGenerator-1.12.2-v9.4.jar");
+            } else if (version.toString() === "website") {
+                window.open("https://www.openterraingenerator.org", "_blank");
             } else {
                 this.echo("[[;red;]Version either too old or too new.] [[i;yellow;]Are you typing version for example] [[b;white;]'1.19.2'][[i;yellow;]?]");
             }
@@ -162,6 +174,18 @@ let term = $(function() {
         },
         gehenna: function() {
             window.open("https://www.curseforge.com/minecraft/mc-mods/gehenna-super-spooky-nether-overhaul-for-forge", "_blank");
+        },
+        memes: function(arg) {
+            if (arg.toString() === "weird") {
+                window.open("https://github.com/FrankTCA/DiscordMemes/tree/weird", "_blank");
+            } else if (arg.toString() === "conversation") {
+                window.open("https://github.com/FrankTCA/DiscordMemes", "_blank");
+            } else {
+                this.echo("[[;red;]Argument invalid, use] [[b;white;]conversation] [[;red;]or] [[b;white;]surreal]");
+            }
+        },
+        thirtydollar: function() {
+            window.open("https://thirtydollar.website", "_blank");
         }
     }, {
         greetings: fullText,
