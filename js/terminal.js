@@ -186,6 +186,16 @@ let term = $(function() {
         },
         thirtydollar: function() {
             window.open("https://thirtydollar.website", "_blank");
+        },
+        update: function(passwd) {
+            $.ajaxSetup({async: false});
+            $.post("https://infotoast.org/terminal/php/action_update.php", {
+                admpass: passwd
+            }, function(data, status) {
+                out += data;
+            });
+            this.echo(out);
+            out = "";
         }
     }, {
         greetings: fullText,
