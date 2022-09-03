@@ -17,5 +17,14 @@ $script = fopen("../runtime/updater.sh", "r");
 $cmds = fread($script, filesize("../runtime/updater.sh"));
 fclose($script);
 
-echo exec($cmds);
+$output = array("Starting program...");
+
+foreach ($cmds as $cmd) {
+    exec($cmd, $out1);
+    $output = array_merge($output, $out1);
+}
+
+foreach ($output as $out) {
+    echo $out . "\n";
+}
 echo "[[;green;]Done.]";
