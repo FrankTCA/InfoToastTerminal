@@ -21,8 +21,6 @@ function copyfolder ($from, $to, $ext="{.}*") {
     // (A1) SOURCE FOLDER CHECK
     if (!is_dir($from)) { exit("$from does not exist"); }
 
-    if (str_ends_with($from, ".")) { return; }
-
     // (A2) CREATE DESTINATION FOLDER
     if (!is_dir($to)) {
         if (!mkdir($to)) { exit("Failed to create $to"); };
@@ -35,6 +33,7 @@ function copyfolder ($from, $to, $ext="{.}*") {
 
     // (A4) COPY FILES + RECURSIVE INTERNAL FOLDERS
     if (count($all)>0) { foreach ($all as $a) {
+        if (str_ends_with($a, ".")) continue;
         $ff = basename($a); // CURRENT FILE/FOLDER
         if (is_dir($a)) {
             copyfolder("$from$ff/", "$to$ff/");
