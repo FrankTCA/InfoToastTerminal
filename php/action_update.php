@@ -17,7 +17,7 @@ $date = date("y-m-d.H:i");
 $backupfile = "../../term-backup/$date/";
 $from = "../../terminal/";
 
-function copyfolder ($from, $to, $ext="{.}*") {
+function copyfolder ($from, $to, $ext="{,.}*") {
     // (A1) SOURCE FOLDER CHECK
     if (!is_dir($from)) { exit("$from does not exist"); }
 
