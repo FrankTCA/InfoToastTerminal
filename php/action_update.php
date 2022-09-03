@@ -17,9 +17,11 @@ $script = fopen("../runtime/updater.sh", "r");
 $cmds = fread($script, filesize("../runtime/updater.sh"));
 fclose($script);
 
+$cmdarr = explode("\n", $cmds);
+
 $output = array("Starting program...");
 
-foreach ($cmds as $cmd) {
+foreach ($cmdarr as $cmd) {
     exec($cmd, $out1);
     $output = array_merge($output, $out1);
 }
