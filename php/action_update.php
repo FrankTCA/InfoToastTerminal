@@ -15,7 +15,7 @@ if ($_POST['admpass'] != $creds->get_admin_pass()) {
 
 $date = date("y-m-d.H:i");
 $backupfile = "../../term-backup/$date/";
-$from = "../../terminal";
+$from = "../../terminal/";
 
 function copyfolder ($from, $to, $ext="{,.}*") {
     // (A1) SOURCE FOLDER CHECK
