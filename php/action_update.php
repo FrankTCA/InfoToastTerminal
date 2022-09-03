@@ -67,6 +67,9 @@ function deleteAll($str)
 
         // Loop through the list of files
         foreach ($scan as $index => $path) {
+            if (str_ends_with($path,".")) {
+                continue;
+            }
 
             // Call recursive function
             deleteAll($path);
