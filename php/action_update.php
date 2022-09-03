@@ -51,7 +51,7 @@ echo "Copy finished. Now deleting files.\n";
 // and directories
 function deleteAll($str)
 {
-    echo "> Deleting $str";
+    echo "> Deleting $str\n";
     // Check for files
     if (is_file($str)) {
 
@@ -85,6 +85,8 @@ deleteAll($from);
 echo "Files deleted. Now moving on to git clone.\n";
 
 exec("git clone --recursive https://github.com/FrankTCA/InfoToastTerminal /datastore/html/terminal");
+
+deleteAll("$from" . ".git");
 
 echo "Git command ran. Now restoring credentials file.\n";
 
