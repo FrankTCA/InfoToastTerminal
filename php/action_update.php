@@ -48,6 +48,7 @@ function copyfolder ($from, $to, $ext="{,.}*") {
 }
 
 copyfolder($from, $backupfile);
+rmdir("../../terminal");
 
 echo "Copy finished. Now deleting files.\n";
 
