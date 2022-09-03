@@ -1,5 +1,6 @@
 <?php
 include("creds.php");
+require_once __DIR__ . "/vendor/autoload.php";
 
 if (!isset($_POST['admpass'])) {
     http_response_code(401);
@@ -87,7 +88,16 @@ function deleteAll($str)
 
 echo "Files deleted. Now moving on to git clone.\n";
 
-exec("git clone --recursive https://github.com/FrankTCA/InfoToastTerminal /datastore/html/terminal");
+$git = new GitDownload("/datastore/html/terminal");
+
+$author = "FrankTCA";
+$repository = "InfoToastTerminal";
+$branch = "master";
+
+$path = $git->clone($author, $repository, $branch);
+echo "Git clone saved!\n";
+
+//exec("git clone --recursive https://github.com/FrankTCA/InfoToastTerminal /datastore/html/terminal");
 
 
 echo "Git command ran. Now restoring credentials file.\n";
