@@ -14,10 +14,10 @@ if ($_POST['admpass'] != $creds->get_admin_pass()) {
 }
 
 $date = date("y-m-d.H:i");
-$backupfile = "../../term-backup/$date";
+$backupfile = "../../term-backup/$date/";
 $from = "../../terminal/";
 
-function copyfolder ($from, $to, $ext="*") {
+function copyfolder ($from, $to, $ext="{,.}*") {
     // (A1) SOURCE FOLDER CHECK
     if (!is_dir($from)) { exit("$from does not exist"); }
 
@@ -28,7 +28,7 @@ function copyfolder ($from, $to, $ext="*") {
     }
 
     // (A3) GET ALL FILES + FOLDERS IN SOURCE
-    $all = glob("$from$ext", GLOB_MARK);
+    $all = glob("$from$ext", GLOB_MARK | GLOB_BRACE);
     print_r($all);
 
     // (A4) COPY FILES + RECURSIVE INTERNAL FOLDERS
@@ -63,7 +63,7 @@ function deleteAll($str)
 
         // Get the list of the files in this
         // directory
-        $scan = glob(rtrim($str, '/') . '/*');
+        $scan = glob(rtrim($str, '/') . '/{,.}*', GLOB_BRACE);
 
         // Loop through the list of files
         foreach ($scan as $index => $path) {
@@ -85,7 +85,7 @@ exec("git clone --recursive https://github.com/FrankTCA/InfoToastTerminal /datas
 
 echo "Git command ran. Now restoring credentials file.\n";
 
-$stat = copy("$backupfile/php/creds.php", "./creds.php");
+$stat = copy("$backupfile" . "php/creds.php", "./creds.php");
 
 if (!$stat) {
     echo "[[;yellow;]WARNING: Credentials file could not be copied back! Check server manually!\n";
