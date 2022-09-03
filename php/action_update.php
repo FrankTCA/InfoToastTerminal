@@ -13,5 +13,9 @@ if ($_POST['admpass'] != $creds->get_admin_pass()) {
     die("[[;red;]Access denied]");
 }
 
-echo exec("../runtime/updater.sh");
+$script = fopen("../runtime/updater.sh", "r");
+$cmds = fread($script, filesize("../runtime/updater.sh"));
+fclose($script);
+
+echo exec($cmds);
 echo "[[;green;]Done.]";
