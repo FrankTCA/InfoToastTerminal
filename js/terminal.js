@@ -189,6 +189,9 @@ let term = $(function() {
         },
         nas: function() {
             window.open("https://quickconnect.to/infotoast2", "_blank");
+        },
+        wplogin: function() {
+            window.open("https://infotoast.org/site/wp-login.php", "_blank");
         }
     }, {
         greetings: fullText,
