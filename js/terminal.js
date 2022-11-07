@@ -56,7 +56,8 @@ let term = $(function() {
                 '[[b;white;]* memes (conversation|weird)]: Visit our meme repository, conversation memes are useful for winning internet arguments, surreal memes are just weird and funny\n' +
                 '[[b;white;]* thirtydollar]: Try it and see.\n' +
                 '[[b;white;]* assignlogin (username) (password)]: Log into assign app.\n' +
-                '[[b;white;]* assigntask (name) (date)]: Create new task with assign. Description support not supported yet.\n' +
+                '[[b;white;]* assigntask (name) (date)]: Create new task with assign.' +
+                '[[b;white;]* assigntaskdesc (name) (date) (description)]: Create new task (with description).\n' +
                 '[[b;white;]* getassignlink (open|copy)]: Get your assign view link.';
             this.echo(helptxt);
         },
@@ -221,6 +222,25 @@ let term = $(function() {
             $.post("https://infotoast.org/assign/php/action_mkevt.php", {
                 name: name,
                 date: date
+            }, function(data, status) {
+                if (data.endsWith("success")) {
+                    out += '[[;green;]Event created!';
+                } else {
+                    out += '[[;red;]' + data + ']';
+                }
+            });
+            this.echo(out);
+            out = "";
+        },
+        assigntaskdesc: function(name, date, description) {
+            this.echo('[[b;yellow;]Make sure you\'ve logged in previously with] [[b;white;]assignlogin]');
+            if (!(/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/.test(date))) {
+                this.echo('[[;red;]Make sure date is written as] [[b;white;]MM/DD/YYYY]');
+            }
+            $.post("https://infotoast.org/assign/php/action_mkevt.php", {
+                name: name,
+                date: date,
+                description: description
             }, function(data, status) {
                 if (data.endsWith("success")) {
                     out += '[[;green;]Event created!';
