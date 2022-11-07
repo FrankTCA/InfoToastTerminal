@@ -201,6 +201,7 @@ let term = $(function() {
             this.echo('[[b;yellow;] This requires prior registation and approval to use the Assign platform.]\n' +
                 'If unregistered, register [[!;;;;https://infotoast.org/assign/register.php]here]\n' +
                 'The GUI version of this can be accessed at: [[!;;;;https://infotoast.org/assign/]Info Toast Assign]');
+            $.ajaxSetup({async: false});
             $.post("https://infotoast.org/assign/php/action_login.php", {
                 un: username,
                 pw: password
@@ -219,6 +220,7 @@ let term = $(function() {
             if (!(/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/.test(date))) {
                 this.echo('[[;red;]Make sure date is written as] [[b;white;]MM/DD/YYYY]');
             }
+            $.ajaxSetup({async: false});
             $.post("https://infotoast.org/assign/php/action_mkevt.php", {
                 name: name,
                 date: date
@@ -237,6 +239,7 @@ let term = $(function() {
             if (!(/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/.test(date))) {
                 this.echo('[[;red;]Make sure date is written as] [[b;white;]MM/DD/YYYY]');
             }
+            $.ajaxSetup({async: false});
             $.post("https://infotoast.org/assign/php/action_mkevt.php", {
                 name: name,
                 date: date,
@@ -254,6 +257,7 @@ let term = $(function() {
         getassignlink: function(opt) {
             this.echo('[[b;yellow;]Make sure you\'ve logged in previously with] [[b;white;]assignlogin]');
             if (opt === "open") {
+                $.ajaxSetup({async: false});
                 $.get("https://infotoast.org/assign/php/action_getlink.php", function(data, status) {
                     if (data.startsWith('https://')) {
                         window.open(data, "_blank");
@@ -262,6 +266,7 @@ let term = $(function() {
                     }
                 });
             } else if (opt === "copy") {
+                $.ajaxSetup({async: false});
                 $.get("https://infotoast.org/assign/php/action_getlink.php", function(data, status) {
                     if (data.startsWith('https://')) {
                         out += '[[;green]' + data + ']';
