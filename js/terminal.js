@@ -56,7 +56,7 @@ let term = $(function() {
                 '[[b;white;]* memes (conversation|weird)]: Visit our meme repository, conversation memes are useful for winning internet arguments, surreal memes are just weird and funny\n' +
                 '[[b;white;]* thirtydollar]: Try it and see.\n' +
                 '[[b;white;]* assignlogin (username) (password)]: Log into assign app.\n' +
-                '[[b;white;]* assigntask (name) (date)]: Create new task with assign.' +
+                '[[b;white;]* assigntask (name) (date)]: Create new task with assign.\n' +
                 '[[b;white;]* assigntaskdesc (name) (date) (description)]: Create new task (with description).\n' +
                 '[[b;white;]* getassignlink (open|copy)]: Get your assign view link.';
             this.echo(helptxt);
