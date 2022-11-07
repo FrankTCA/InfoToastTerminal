@@ -54,7 +54,10 @@ let term = $(function() {
                 '[[b;white;]* baritone (mc version)]: Download our Baritone fork for the latest MC versions.\n' +
                 '[[b;white;]* gehenna]: Check out Frank\'s sideproject, Gehenna\n' +
                 '[[b;white;]* memes (conversation|weird)]: Visit our meme repository, conversation memes are useful for winning internet arguments, surreal memes are just weird and funny\n' +
-                '[[b;white;]* thirtydollar]: Try it and see.';
+                '[[b;white;]* thirtydollar]: Try it and see.\n' +
+                '[[b;white;]* assignlogin (username) (password)]: Log into assign app.\n' +
+                '[[b;white;]* assigntask (name) (date)]: Create new task with assign. Description support not supported yet.\n' +
+                '[[b;white;]* getassignlink (open|copy)]: Get your assign view link.';
             this.echo(helptxt);
         },
         close: function() {
@@ -192,6 +195,65 @@ let term = $(function() {
         },
         wplogin: function() {
             window.open("https://infotoast.org/site/wp-login.php", "_blank");
+        },
+        assignlogin: function(username, password) {
+            this.echo('[[b;yellow;] This requires prior registation and approval to use the Assign platform.]\n' +
+                'If unregistered, register [[!;;;;https://infotoast.org/assign/register.php]here]\n' +
+                'The GUI version of this can be accessed at: [[!;;;;https://infotoast.org/assign/]Info Toast Assign]');
+            $.post("https://infotoast.org/assign/php/action_login.php", {
+                un: username,
+                pw: password
+            }, function(data, status) {
+                if (data.endsWith("success")) {
+                    out += "[[;green;]Authentication successful!]";
+                } else {
+                    out += "[[;red;]" + data + "]";
+                }
+            });
+            this.echo(out);
+            out = "";
+        },
+        assigntask: function(name, date) {
+            this.echo('[[b;yellow;]Make sure you\'ve logged in previously with] [[b;white;]assignlogin]');
+            if (!(/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/.test(date))) {
+                this.echo('[[;red;]Make sure date is written as] [[b;white;]MM/DD/YYYY]');
+            }
+            $.post("https://infotoast.org/assign/php/action_mkevt.php", {
+                name: name,
+                date: date
+            }, function(data, status) {
+                if (data.endsWith("success")) {
+                    out += '[[;green;]Event created!';
+                } else {
+                    out += '[[;red;]' + data + ']';
+                }
+            });
+            this.echo(out);
+            out = "";
+        },
+        getassignlink: function(opt) {
+            this.echo('[[b;yellow;]Make sure you\'ve logged in previously with] [[b;white;]assignlogin]');
+            if (opt === "open") {
+                $.get("https://infotoast.org/assign/php/action_getlink.php", function(data, status) {
+                    if (data.startsWith('https://')) {
+                        window.open(data, "_blank");
+                    } else {
+                        out += '[[;red;]' + data + ']';
+                    }
+                });
+            } else if (opt === "copy") {
+                $.get("https://infotoast.org/assign/php/action_getlink.php", function(data, status) {
+                    if (data.startsWith('https://')) {
+                        out += '[[;green]' + data + ']';
+                    } else {
+                        out += '[[;red;]' + data;
+                    }
+                });
+            } else {
+                out += '[[;red;]Invalid argument! Valid args are] [[b;white;]open] [[;red;]and] [[b;white;]copy][[;red;].]';
+            }
+            this.echo(out);
+            out = "";
         }
     }, {
         greetings: fullText,
