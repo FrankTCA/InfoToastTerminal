@@ -58,7 +58,9 @@ let term = $(function() {
                 '[[b;white;]* assignlogin (username) (password)]: Log into assign app.\n' +
                 '[[b;white;]* assigntask (name) (date)]: Create new task with assign.\n' +
                 '[[b;white;]* assigntaskdesc (name) (date) (description)]: Create new task (with description).\n' +
-                '[[b;white;]* getassignlink (open|copy)]: Get your assign view link.';
+                '[[b;white;]* getassignlink (open|copy)]: Get your assign view link.\n' +
+                '[[b;white;]* hosts]: Download the hosts.txt file that enables you to block tracking systemwide.\n' +
+                '[[b;white;]* traffic]: See our traffic using the open-source, privacy-protecting analytics engine, Plausible.';
             this.echo(helptxt);
         },
         close: function() {
@@ -279,6 +281,15 @@ let term = $(function() {
             }
             this.echo(out);
             out = "";
+        },
+        hosts: function() {
+            this.echo("[[b;white;]Downloading...]");
+            download("https://infotoast.org/Downloads/hosts", "hosts.txt");
+            this.echo("[[;green;]Downloaded!]");
+        },
+        traffic: function() {
+            this.echo("[[;green;]Showing Plausible analytics!");
+            window.open("https://plausible.io/infotoast.org", "_blank");
         }
     }, {
         greetings: fullText,
