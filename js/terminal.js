@@ -60,7 +60,8 @@ let term = $(function() {
                 '[[b;white;]* assigntaskdesc (name) (date) (description)]: Create new task (with description).\n' +
                 '[[b;white;]* getassignlink (open|copy)]: Get your assign view link.\n' +
                 '[[b;white;]* hosts]: Download the hosts.txt file that enables you to block tracking systemwide.\n' +
-                '[[b;white;]* traffic]: See our traffic using the open-source, privacy-protecting analytics engine, Plausible.';
+                '[[b;white;]* traffic]: See our traffic using the open-source, privacy-protecting analytics engine, Plausible.\n' +
+                '[[b;white;]* homepage]: Go to Info Toast\'s beautiful web-based desktop background.';
             this.echo(helptxt);
         },
         close: function() {
@@ -290,6 +291,10 @@ let term = $(function() {
         traffic: function() {
             this.echo("[[;green;]Showing Plausible analytics!");
             window.open("https://plausible.io/infotoast.org", "_blank");
+        },
+        homepage: function() {
+            this.echo("[[;green;]Showing homepage!]");
+            window.open("https://infotoast.org/homepage/", "_blank");
         }
     }, {
         greetings: fullText,
