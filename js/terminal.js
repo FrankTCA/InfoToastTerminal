@@ -45,7 +45,10 @@ let term = $(function() {
                 '[[b;white;]* home]: Go to info toast homepage.\n' +
                 '[[b;white;]* help]: Shows this menu.\n' +
                 '[[b;white;]* close]: Closes this tab.\n' +
-                '[[b;white;]* aka (username) (link name) (url) (password)]: Creates shortened links using Info Toast AKA\n' +
+                '[[b;white;]* akalogin (username) (password)]: Login to Info Toast AKA\n' +
+                '[[b;white;]* akamklink (name) (url)]: Create Link in Info Toast AKA\n' +
+                '[[b;white;]* akadash]: Go to Info Toast AKA Dashboard\n' +
+                '[[b;white;]* akalog (link name)]: View log for link in AKA\n' +
                 '[[b;white;]* discord]: Go to info toast discord.\n' +
                 '[[b;white;]* matrix]: Register with info toast Matrix [[i;yellow;]recommended over discord]\n' +
                 '[[b;white;]* cat]: Try it and see\n' +
@@ -67,7 +70,7 @@ let term = $(function() {
         close: function() {
             window.close();
         },
-        aka: function(username, lname, url, passwd) {
+        akalogin: function(username, passwd) {
             this.echo('[[b;yellow;] This requires prior registation and approval to use the aka platform.]\n' +
                 'If unregistered, register [[!;;;;https://infotoast.org/aka/register.php]here]\n' +
                 'The GUI version of this can be accessed at: [[!;;;;https://infotoast.org/aka/]Info Toast AKA]');
@@ -78,19 +81,7 @@ let term = $(function() {
             }, function(data, status) {
                 console.log(data);
                 if (data.endsWith("success")) {
-                    data = {
-                        name: lname,
-                        url: url
-                    }
-                    $.post("https://infotoast.org/aka/php/action_mklink.php", data, function(data, status) {
-                        console.log(data);
-                        if (data.endsWith("success")) {
-                            out += "[[;green;]Link created successfully and available at] [[!;;;;https://infotoast.org/aka/" + lname + "]https://infotoast.org/aka/" + lname + "]";
-                        } else {
-                            out += "[[;red;]Did not work!]\n";
-                            out += data;
-                        }
-                    });
+                    out += "[[;green;]Login successful!]\n";
                 } else {
                     out += "[[;red;]Username or password invalid!]\n";
                     out += data;
@@ -98,6 +89,35 @@ let term = $(function() {
             });
             this.echo(out);
             out = "";
+        },
+        akamklink: function(lname, url) {
+            this.echo("[[b;yellow;]Requires login with] [[b;white;]akalogin]");
+            data = {
+                name: lname,
+                url: url
+            }
+            $.post("https://infotoast.org/aka/php/action_mklink.php", data, function(data, status) {
+                console.log(data);
+                if (data.endsWith("success")) {
+                    out += "[[;green;]Link created successfully and available at] [[!;;;;https://infotoast.org/aka/" + lname + "]https://infotoast.org/aka/" + lname + "]";
+                } else {
+                    out += "[[;red;]Link creation did not work!]\n";
+                    out += data;
+                }
+            });
+
+            this.echo(out);
+            out = "";
+        },
+        akadash: function() {
+            this.echo("[[b;yellow;]Requires login with] [[b;white;]akalogin]");
+            window.open("https://infotoast.org/aka/dash.php", "_blank");
+            this.echo("[[;green;]Opened!]");
+        },
+        akalog: function(name) {
+            this.echo("[[b;yellow;]Requires login with] [[b;white;]akalogin]");
+            window.open("https://infotoast.org/aka/moreinfo.php?link=" + name, "_blank");
+            this.echo("[[;green;]Opened!]");
         },
         discord: function() {
             window.location.replace("https://discord.gg/infotoast");
