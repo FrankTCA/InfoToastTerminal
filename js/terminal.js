@@ -67,7 +67,6 @@ let term = $(function() {
         close: function() {
             window.close();
         },
-        // Needs fixing on main server
         aka: function(username, lname, url, passwd) {
             this.echo('[[b;yellow;] This requires prior registation and approval to use the aka platform.]\n' +
                 'If unregistered, register [[!;;;;https://infotoast.org/aka/register.php]here]\n' +
