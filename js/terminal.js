@@ -64,7 +64,9 @@ let term = $(function() {
                 '[[b;white;]* getassignlink (open|copy)]: Get your assign view link.\n' +
                 '[[b;white;]* hosts]: Download the hosts.txt file that enables you to block tracking systemwide.\n' +
                 '[[b;white;]* traffic]: See our traffic using the open-source, privacy-protecting analytics engine, Plausible.\n' +
-                '[[b;white;]* homepage]: Go to Info Toast\'s beautiful web-based desktop background.';
+                '[[b;white;]* homepage]: Go to Info Toast\'s beautiful web-based desktop background.\n' +
+                '[[b;white;]* lorax (mc version|\"site\")]: Download our custom tree spawning plugin.\n' +
+                '[[b;white;]* dropsoverhaul (mc version|\"site\")]: Download our experimental lag prevention plugin.';
             this.echo(helptxt);
         },
         close: function() {
@@ -314,6 +316,34 @@ let term = $(function() {
         homepage: function() {
             this.echo("[[;green;]Showing homepage!]");
             window.open("https://infotoast.org/homepage/", "_blank");
+        },
+        lorax: function(version) {
+            if (version.toString() === "1.19.3") {
+                download("https://infotoast.org/Downloads/Lorax-4.0.jar", "Lorax-4.0.jar");
+                this.echo("[[;green;]Downloaded!]");
+            } else if (version.toString().startsWith("1.18")) {
+                download("https://infotoast.org/Downloads/Lorax-1.0.jar", "Lorax-1.0.jar");
+                this.echo("[[;green;]Downloaded!]");
+            } else if (version.toString() === "site") {
+                this.echo("[[;green;]Going to SpigotMC page!]");
+                window.open("https://www.spigotmc.org/resources/lorax-custom-trees.94584/", "_blank");
+            } else {
+                this.echo("[[;red;]Version either too old, too new, or unsupported.] [[i;yellow;]Are you typing version for example] [[b;white;]'1.19.3'][[i;yellow;]?]");
+            }
+        },
+        dropsoverhaul: function(version) {
+            if (version.toString() === "1.19.3") {
+                download("https://infotoast.org/Downloads/DropsOverhaul-2.3.jar", "DropsOverhaul-2.3.jar");
+                this.echo("[[;green;]Downloaded!]");
+            } else if (version.toString().startsWith("1.18")) {
+                download("https://infotoast.org/Downloads/DropsOverhaul-1.1.jar", "DropsOverhaul-2.2.jar");
+                this.echo("[[;green;]Downloaded!]");
+            } else if (version.toString() === "site") {
+                this.echo("[[;green;]Going to SpigotMC page!]");
+                window.open("https://www.spigotmc.org/resources/dropsoverhaul.91000/", "_blank");
+            } else {
+                this.echo("[[;red;]Version either too old, too new, or unsupported.] [[i;yellow;]Are you typing version for example] [[b;white;]'1.19.3'][[i;yellow;]?]");
+            }
         }
     }, {
         greetings: fullText,
