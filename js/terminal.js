@@ -321,6 +321,9 @@ let term = $(function() {
             if (version.toString() === "1.19.3") {
                 download("https://infotoast.org/Downloads/Lorax-4.0.jar", "Lorax-4.0.jar");
                 this.echo("[[;green;]Downloaded!]");
+            } else if (version.toString() === "1.19.4") {
+                download("https://infotoast.org/Downloads/Lorax-4.1.jar", "Lorax-4.1.jar");
+                this.echo("[[;green;]Downloaded!]");
             } else if (version.toString().startsWith("1.18")) {
                 download("https://infotoast.org/Downloads/Lorax-1.0.jar", "Lorax-1.0.jar");
                 this.echo("[[;green;]Downloaded!]");
@@ -332,7 +335,7 @@ let term = $(function() {
             }
         },
         dropsoverhaul: function(version) {
-            if (version.toString() === "1.19.3") {
+            if (version.toString() === "1.19.3" || version.toString() === "1.19.4") {
                 download("https://infotoast.org/Downloads/DropsOverhaul-2.3.jar", "DropsOverhaul-2.3.jar");
                 this.echo("[[;green;]Downloaded!]");
             } else if (version.toString().startsWith("1.18")) {
