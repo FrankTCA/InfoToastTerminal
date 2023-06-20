@@ -347,6 +347,18 @@ let term = $(function() {
             } else {
                 this.echo("[[;red;]Version either too old, too new, or unsupported.] [[i;yellow;]Are you typing version for example] [[b;white;]'1.19.3'][[i;yellow;]?]");
             }
+        },
+        logout: function() {
+            $.ajaxSetup({async: false});
+            $.get("https://infotoast.org/logout/", function(data, status) {
+                if (data.startsWith("logged out")) {
+                    out += "[[;green;]Logged out successfully!]";
+                } else {
+                    out += "[[b;red;]There was an error!]\n[[i;yellow;]Code: " + status + "]\n[[;yellow;]Message: " + data + "]";
+                }
+            });
+            this.echo(out);
+            out = "";
         }
     }, {
         greetings: fullText,
