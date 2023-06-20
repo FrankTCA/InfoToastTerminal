@@ -66,7 +66,8 @@ let term = $(function() {
                 '[[b;white;]* traffic]: See our traffic using the open-source, privacy-protecting analytics engine, Plausible.\n' +
                 '[[b;white;]* homepage]: Go to Info Toast\'s beautiful web-based desktop background.\n' +
                 '[[b;white;]* lorax (mc version|\"site\")]: Download our custom tree spawning plugin.\n' +
-                '[[b;white;]* dropsoverhaul (mc version|\"site\")]: Download our experimental lag prevention plugin.';
+                '[[b;white;]* dropsoverhaul (mc version|\"site\")]: Download our experimental lag prevention plugin.\n' +
+                '[[b;white;]* logout]: Log out of all sessions (e.g. aka or assign)';
             this.echo(helptxt);
         },
         close: function() {
